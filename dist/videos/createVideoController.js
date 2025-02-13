@@ -33,13 +33,13 @@ const inputValidation = (video) => {
 exports.inputValidation = inputValidation;
 const createVideoController = (req, res) => {
     const errors = (0, exports.inputValidation)(req.body);
-    if (!errors.errorsMessages.length) { // если есть ошибки - отправляем ошибки
+    if (errors.errorsMessages.length > 0) { // если есть ошибки - отправляем ошибки
         res
             .status(400)
             .json(errors);
         return;
     }
-    if (!req.body.title) {
+    if (!req.body.title || !req.body.author) {
         res.sendStatus(400);
         return;
     }
