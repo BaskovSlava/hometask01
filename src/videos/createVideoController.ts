@@ -47,7 +47,7 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
     const date = new Date();
     const newVideo: any /*VideoDBType*/ = {
         ...req.body,
-        id: req.body.id,
+        id: Date.now(),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: false,
