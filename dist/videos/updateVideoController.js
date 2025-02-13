@@ -23,6 +23,6 @@ const updateVideoController = (req, res) => {
         return;
     }
     foundVideo.title = req.body.title;
-    res.sendStatus(204);
+    res.sendStatus(204).send(foundVideo);
 };
 exports.updateVideoController = updateVideoController;
