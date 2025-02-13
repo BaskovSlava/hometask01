@@ -43,11 +43,23 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
         res.sendStatus(400);
         return;
     }
+    let title = req.body.title
+    if (!title || typeof title !== 'string' || !title.trim()) {
+        res.sendStatus(400).send({
+            errorsMessages: [{
+                "message": "Incorrect title",
+                "field": "title"
+            }],
+            resultCode: 1
+        })
+    return;
+}
+
     // если все ок - добавляем видео
     const date = new Date();
     const newVideo: any /*VideoDBType*/ = {
         ...req.body,
-        id: Date.now(),
+        id: +(Date.now()),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: false,
@@ -59,6 +71,7 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
 
     res
         .status(201)
-        .json(newVideo)
-
+        .send(newVideo)
 }
+
+
