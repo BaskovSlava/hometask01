@@ -8,6 +8,18 @@ describe('/videos', () => {
         setDB()
     })
 
+    it('should return 200 and empty array', async () => {
+        await req
+            .get(SETTINGS.PATH.VIDEOS)
+            .expect(200, [])
+    })
+
+    it('should return 404 for not existing video', async () => {
+        await req
+            .get(`${SETTINGS.PATH.VIDEOS}/1000`)
+            .expect(404)
+    })
+
     it('should create new video', async () => {
         const res = await req
             .post(SETTINGS.PATH.VIDEOS)
@@ -21,11 +33,15 @@ describe('/videos', () => {
             .send({title: "", author: "", availableResolutions: ["P144"]})
             .expect(400)
     })
-    it('should not update with incorrect data', async () => {
+    it('should not update with incorrect input data', async () => {
         await req
             .post(SETTINGS.PATH.VIDEOS)
-            .send({title: "9", author: "9", availableResolutions: ["P1080"], minAgeRestriction: "20", publicationDate: "1738172041000"})
+            .send({title: "", author: "", availableResolutions: ["P1080"], minAgeRestriction: "", publicationDate: ""})
             .expect(400)
+
+        await req
+            .get(SETTINGS.PATH.VIDEOS)
+            .expect(200, [])
     })
     it("should get empty array", async () => {
         const res = await req
@@ -43,4 +59,6 @@ describe('/videos', () => {
 
         expect(res.body.length).toBe(1)
     })
+
+
 })

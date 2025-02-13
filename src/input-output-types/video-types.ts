@@ -27,6 +27,7 @@ export type OutputVideoType = {
 
 export type InputVideoType = {
     minAgeRestriction: any;
+    id: number;
     title: string
     author: string
     availableResolution: Resolutions[]

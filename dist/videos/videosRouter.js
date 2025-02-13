@@ -15,4 +15,3 @@ exports.videosRouter.get('/:id', findVideoController_1.findVideoController);
 exports.videosRouter.delete('/:id', deleteVideoController_1.deleteVideoController);
 exports.videosRouter.put('/:id', updateVideoController_1.updateVideoController);
 exports.videosRouter.delete('/', deleteAllVideoTesting_1.deleteAllVideoTesting);
-// не забудьте добавить роут в апп

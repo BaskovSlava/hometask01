@@ -39,11 +39,15 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
             .json(errors)
         return
     }
+    if (!req.body.title) {
+        res.sendStatus(400);
+        return;
+    }
     // если все ок - добавляем видео
     const date = new Date();
     const newVideo: any /*VideoDBType*/ = {
         ...req.body,
-        id: Date.now() + Math.random(),
+        id: req.body.id,
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: false,

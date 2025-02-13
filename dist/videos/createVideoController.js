@@ -39,9 +39,13 @@ const createVideoController = (req, res) => {
             .json(errors);
         return;
     }
+    if (!req.body.title) {
+        res.sendStatus(400);
+        return;
+    }
     // если все ок - добавляем видео
     const date = new Date();
-    const newVideo /*VideoDBType*/ = Object.assign(Object.assign({}, req.body), { id: Date.now() + Math.random(), title: req.body.title, author: req.body.author, canBeDownloaded: false, minAgeRestriction: null, createdAt: date.toISOString(), publicationDate: new Date(date.setDate(date.getDate() + 1)) });
+    const newVideo /*VideoDBType*/ = Object.assign(Object.assign({}, req.body), { id: req.body.id, title: req.body.title, author: req.body.author, canBeDownloaded: false, minAgeRestriction: null, createdAt: date.toISOString(), publicationDate: new Date(date.setDate(date.getDate() + 1)) });
     db_1.db.videos = [...db_1.db.videos, newVideo];
     res
         .status(201)
