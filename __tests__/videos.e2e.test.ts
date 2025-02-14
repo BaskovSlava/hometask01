@@ -9,6 +9,22 @@ describe('/videos', () => {
         setDB()
     })
 
+    it('should return 400 when title is null', async () => {
+        const response = await req
+            .post('/videos')
+            .send({
+                title: null,
+                author: 'Author',
+                description: 'Description',
+                availableResolutions: ['P720']
+            });
+
+        expect(response.status).toBe(400);
+        expect(response.body.errorsMessages).toEqual([
+            { message: 'error!', field: 'title' }
+        ]);
+    });
+
     it('should return 200 and empty array', async () => {
         await req
             .get(SETTINGS.PATH.VIDEOS)
@@ -33,6 +49,8 @@ describe('/videos', () => {
         await req
             .post(SETTINGS.PATH.VIDEOS)
             .send({title: "", author: "", availableResolutions: [`${Resolutions.P144}`]})
+            .send({title: "", author: "", availableResolutions: [`${Resolutions.P2160}`]})
+            .send({title: "", author: "", availableResolutions: [`${Resolutions.P720}`]})
             .expect(400)
     })
     it('should not update with incorrect input data', async () => {
