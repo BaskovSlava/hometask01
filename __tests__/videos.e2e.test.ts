@@ -2,6 +2,7 @@ import {req} from './test-helpers'
 import {setDB} from '../src/db/db'
 import {dataset1} from './datasets'
 import {SETTINGS} from '../src/settings'
+import {Resolutions} from "../src/input-output-types/video-types";
 
 describe('/videos', () => {
     beforeAll(async () => { // очистка базы данных перед началом тестирования
@@ -23,7 +24,7 @@ describe('/videos', () => {
     it('should create new video', async () => {
         const res = await req
             .post(SETTINGS.PATH.VIDEOS)
-            .send({title: "1", author: "52", availableResolutions: ["P144"]})
+            .send({title: "1", author: "52", availableResolutions: [`${Resolutions.P144}`]})
             .expect(201)
         console.log(res.body) // можно посмотреть ответ эндпоинта
 
@@ -31,13 +32,13 @@ describe('/videos', () => {
     it('should not create new video', async () => {
         await req
             .post(SETTINGS.PATH.VIDEOS)
-            .send({title: "", author: "", availableResolutions: ["P144"]})
+            .send({title: "", author: "", availableResolutions: [`${Resolutions.P144}`]})
             .expect(400)
     })
     it('should not update with incorrect input data', async () => {
         await req
             .post(SETTINGS.PATH.VIDEOS)
-            .send({title: "", author: "", availableResolutions: ["P1080"], minAgeRestriction: "", publicationDate: ""})
+            .send({title: "", author: "", availableResolutions: [`${Resolutions.P1080}`], minAgeRestriction: "", publicationDate: ""})
             .expect(400)
 
         await req

@@ -5,7 +5,6 @@ const db_1 = require("../db/db");
 const deleteAllVideoTesting = (req, res) => {
     db_1.db.videos = [];
     res
-        .status(204)
-        .json('');
+        .sendStatus(204);
 };
 exports.deleteAllVideoTesting = deleteAllVideoTesting;
