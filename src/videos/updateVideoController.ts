@@ -13,10 +13,6 @@ export const updateVideoController = (req: Request, res: Response) => {
         return;
     }
 
-    if (!req.body.title) {
-        res.sendStatus(404);
-        return;
-    }
     const foundVideo = db.videos.find(video => video.id === +req.params.id);
     if (!foundVideo) {
         res.sendStatus(404);

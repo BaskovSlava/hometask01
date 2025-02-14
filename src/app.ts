@@ -13,7 +13,8 @@ app.get('/', (req, res) => {
     res.status(200).json({version: '1.0'})
 })
 
-app.get(SETTINGS.PATH.VIDEOS, getVideosController)
 app.use(SETTINGS.PATH.VIDEOS, videosRouter)
 app.use(SETTINGS.PATH.TESTING, videosRouter)
 app.use(SETTINGS.PATH.__test__, videosRouter)
+
+//app.get(SETTINGS.PATH.VIDEOS, getVideosController)

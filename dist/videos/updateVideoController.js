@@ -13,10 +13,6 @@ const updateVideoController = (req, res) => {
         });
         return;
     }
-    if (!req.body.title) {
-        res.sendStatus(404);
-        return;
-    }
     const foundVideo = db_1.db.videos.find(video => video.id === +req.params.id);
     if (!foundVideo) {
         res.sendStatus(404);

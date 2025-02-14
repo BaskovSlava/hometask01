@@ -3,7 +3,8 @@ import {db} from "../db/db";
 
 export const findVideoController = (req: Request, res: Response<any>) => {
     const videos = db.videos // получаем все видео из базы данных
-    const video = videos.find(video => video.id === req.params.id)
+    console.log(videos)
+    const video = videos.find(video => video.id === +req.params.id)
     video ?
         res
             .status(200)

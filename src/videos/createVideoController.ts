@@ -31,18 +31,15 @@ export const inputValidation = (video: InputVideoType) => {
     return errors
 }
 
-export const createVideoController = (req: Request<any, any, InputVideoType>, res: Response<any | OutputErrorsType>) => {
+export const createVideoController = (req: Request<any, any, InputVideoType>, res: Response <any>) => {
     const errors = inputValidation(req.body)
     if (errors.errorsMessages.length) { // если есть ошибки - отправляем ошибки
         res
-            .status(400)
+            .sendStatus(400)
             .json(errors)
         return
     }
-    if (!req.body.title || !req.body.author) {
-        res.sendStatus(400);
-        return;
-    }
+
     // если все ок - добавляем видео
     const date = new Date();
     const newVideo: any /*VideoDBType*/ = {
@@ -64,7 +61,10 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
 
 
 
-
+// if (!req.body.title || !req.body.author) {
+//     res.sendStatus(400);
+//     return;
+// }
 
 // let title = req.body.title
 // if (!title || typeof title !== 'string' || !title.trim()) {

@@ -35,12 +35,8 @@ const createVideoController = (req, res) => {
     const errors = (0, exports.inputValidation)(req.body);
     if (errors.errorsMessages.length) { // если есть ошибки - отправляем ошибки
         res
-            .status(400)
+            .sendStatus(400)
             .json(errors);
-        return;
-    }
-    if (!req.body.title || !req.body.author) {
-        res.sendStatus(400);
         return;
     }
     // если все ок - добавляем видео
@@ -52,6 +48,10 @@ const createVideoController = (req, res) => {
         .send(newVideo);
 };
 exports.createVideoController = createVideoController;
+// if (!req.body.title || !req.body.author) {
+//     res.sendStatus(400);
+//     return;
+// }
 // let title = req.body.title
 // if (!title || typeof title !== 'string' || !title.trim()) {
 //     res.sendStatus(400).send({
