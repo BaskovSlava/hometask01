@@ -23,7 +23,7 @@ export const inputValidation = (video: InputVideoType) => {
             message: 'error!', field: 'minAgeRestriction'
         })
     }
-    if (!Array.isArray(video.availableResolution) || video.availableResolution.find(p => !Resolutions[p])) {
+    if (!Array.isArray(video.availableResolutions) || video.availableResolutions.find(p => !Resolutions[p])) {
         errors.errorsMessages.push({
             message: 'error!', field: 'availableResolutions'
         })

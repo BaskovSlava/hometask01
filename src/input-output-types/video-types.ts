@@ -22,7 +22,7 @@ export type OutputVideoType = {
     minAgeRestriction: null
     createdAt: string
     publicationDate: string
-    availableResolution: Resolutions[]
+    availableResolutions: Resolutions[]
 }
 
 export type InputVideoType = {
@@ -30,5 +30,5 @@ export type InputVideoType = {
     id: number;
     title: string
     author: string
-    availableResolution: Resolutions[]
+    availableResolutions: Resolutions[]
 }

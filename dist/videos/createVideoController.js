@@ -23,7 +23,7 @@ const inputValidation = (video) => {
             message: 'error!', field: 'minAgeRestriction'
         });
     }
-    if (!Array.isArray(video.availableResolution) || video.availableResolution.find(p => !video_types_1.Resolutions[p])) {
+    if (!Array.isArray(video.availableResolutions) || video.availableResolutions.find(p => !video_types_1.Resolutions[p])) {
         errors.errorsMessages.push({
             message: 'error!', field: 'availableResolutions'
         });
